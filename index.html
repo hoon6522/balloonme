@@ -11,7 +11,7 @@
 			<img src="./img/balloon_me_logo.jpg" alt="Balloon Me">
 		</div>
 		<div class="container-fluid">
-			<div class="mb-3 form-field-select-wrapper">
+			<div class="mb-4 form-field-select-wrapper">
 				<label for="sizeOfBalloon" class="form-label">풍선 크기: </label>
 				<select class="form-select" id="sizeOfBalloon" aria-label="Default select example" title="풍선 크기">
 					<option value="5">5인치 풍선</option>
@@ -21,17 +21,17 @@
 					<option value="16">16인치 풍선</option>
 				</select>
 			</div>
-			<div class="mb-3">
+			<div class="mb-4">
 				<label for="Height" class="form-label">높이(미터): </label>
-				<input type="range" placeholder="예시: 1.8" class="range" min="0" max="3" step="0.1" id="Height">
 				<div class="form-text" id="Height_txt">높이를 슬라이더로 설정하세요.</div>
+				<input type="range" placeholder="예시: 1.8" class="range" min="0" max="3" step="0.1" id="Height" style="width:100%; height: 20px;">
 			</div>
-			<div class="mb-3">
+			<div class="mb-4">
 				<label for="Width" class="form-label">가로길이(미터): </label>
-				<input type="range" placeholder="예시: 1.2" class="range" min="0" max="3" step="0.1" id="Width">
 				<div class="form-text" id="Width_txt">가로길이를 슬라이더로 설정하세요.</div>
+				<input type="range" placeholder="예시: 1.2" class="range" min="0" max="3" step="0.1" id="Width" style="width:100%; height: 20px;">
 			</div>
-			<div class="btn-group">
+			<div class="btn-group mt-3" style="width: 100%;">
 				<button type="submit" class="btn btn-primary" onclick="calculate();">계산하기</button>
 			</div>			
 		</div>
@@ -62,16 +62,8 @@
 				keyboard: true
 			});
 
-			widthElem.addEventListener("change", function() {
-				document.getElementById("Width_txt").innerHTML = this.value + "미터로 설정 합니다.";
-			});
-
 			widthElem.addEventListener("input", function() {
 				document.getElementById("Width_txt").innerHTML = this.value + "미터로 설정 합니다.";
-			});
-
-			heightElem.addEventListener("change", function() {
-				document.getElementById("Height_txt").innerHTML = this.value + "미터로 설정 합니다.";
 			});
 
 			heightElem.addEventListener("input", function() {
