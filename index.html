@@ -66,22 +66,30 @@
 				document.getElementById("Width_txt").innerHTML = this.value + "미터로 설정 합니다.";
 			});
 
+			widthElem.addEventListener("input", function() {
+				document.getElementById("Width_txt").innerHTML = this.value + "미터로 설정 합니다.";
+			});
+
 			heightElem.addEventListener("change", function() {
 				document.getElementById("Height_txt").innerHTML = this.value + "미터로 설정 합니다.";
 			});
 
+			heightElem.addEventListener("input", function() {
+				document.getElementById("Height_txt").innerHTML = this.value + "미터로 설정 합니다.";
+			});
+
 			function calculate(){
-				var Width = (document.getElementById("Width").value*3.281).toString();
-				var Height = (document.getElementById("Height").value*3.281).toString();
+				var Width = (widthElem.value * 3.281).toString();
+				var Height = (heightElem.value * 3.281).toString();
 				var sizeOfBalloon_ = document.getElementById("sizeOfBalloon");
 				var size_of_balloon = (sizeOfBalloon_.options[sizeOfBalloon_.selectedIndex].value);
 				var Length = 0;
 				var required_balloon = 0
 
-				if (document.getElementById("Height").value === "") {
+				if (heightElem.value === "") {
 					document.getElementById("result_msg").innerHTML = "높이를 입력해주십시오.";
 					modal.show();
-				}else if (document.getElementById("Width").value === ""){
+				}else if (widthElem.value === ""){
 					document.getElementById("result_msg").innerHTML = "가로길이를 입력해주십시오.";
 					modal.show();
 				}else {
@@ -114,8 +122,8 @@
 					}
 
 					/*document.getElementById("Balloons").innerHTML =required_balloon;
-					document.getElementById("Width").innerHTML = Width;
-					document.getElementById("Height").innerHTML = Height;
+					widthElem.innerHTML = Width;
+					heightElem.innerHTML = Height;
 					document.getElementById("Length").innerHTML = Length;
 					document.getElementById('Element').style.display = "block";*/
 
