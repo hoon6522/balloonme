@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Balloon Arch Calculator</title>
+		<link href="./css/bootstrap.min.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<div class="container-fluid text-center">
+			<img src="./img/balloon_me_logo.jpg" alt="Balloon Me">
+		</div>
+		<div class="container-fluid">
+			<div class="mb-3 form-field-select-wrapper">
+				<label for="sizeOfBalloon" class="form-label">풍선 크기: </label>
+				<select class="form-select" id="sizeOfBalloon" aria-label="Default select example" title="풍선 크기">
+					<option value="5">5인치 풍선</option>
+					<option value="9">9인치 풍선</option>
+					<option value="11">11인치 풍선</option>
+					<option value="14">14인치 풍선</option>
+					<option value="16">16인치 풍선</option>
+				</select>
+			</div>
+			<div class="mb-3">
+				<label for="Height" class="form-label">높이(미터): </label>
+				<input type="text" placeholder="예시: 1.8" class="form-control" id="Height">
+				<div class="form-text">높이를 미터단위로 입력하세요.</div>
+			</div>
+			<div class="mb-3">
+				<label for="Width" class="form-label">가로길이(미터): </label>
+				<input type="text" placeholder="예시: 1.2" class="form-control" id="Width">
+				<div class="form-text">가로길이를 미터단위로 입력하세요.</div>
+			</div>
+			<div class="btn-group">
+				<button type="submit" class="btn btn-primary" onclick="calculate();">계산하기</button>
+			</div>			
+		</div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h1 class="modal-title fs-5" id="staticBackdropLabel">계산 결과</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			  </div>
+			  <div class="modal-body" id="result_msg"></div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		
+		<script src="./js/bootstrap.bundle.min.js"></script>
+		<script>
+		var modal = new bootstrap.Modal("#staticBackdrop", {
+			backdrop: true,
+			focus: true,
+			keyboard: true
+		});
+				
+		function calculate(){
+			var Width = document.getElementById("Width").value*3.281;
+			var Height = document.getElementById("Height").value*3.281;
+			var sizeOfBalloon_ = document.getElementById("sizeOfBalloon");
+			var size_of_balloon = (sizeOfBalloon_.options[sizeOfBalloon_.selectedIndex].value);
+			if (Width == ""){
+				document.getElementById("result_msg").innerHTML = "가로길이를 입력해주십시오.";
+				modal.show();
+			}
+			else if (Height == ""){
+				document.getElementById("result_msg").innerHTML = "높이를 입력해주십시오.";
+				modal.show();
+			}
+			else {
+				
+				var required_balloon = 0
+				if (parseInt(Width, 10) > parseInt(Height, 10)){
+					Length = parseInt(Width, 10) + parseInt(Height, 10)
+				}
+
+				else if (parseInt(Width, 10) == parseInt(Height, 10)){
+					Length = 1.5 * parseInt(Height, 10)
+				}
+
+				else if (parseInt(Width, 10) < parseInt(Height, 10)){
+					Length = 2 * parseInt(Height, 10) + parseInt(Width, 10)
+				}
+
+				if (size_of_balloon == 5){
+					required_balloon = 12 * parseInt(Length, 10)
+				}
+				else if (size_of_balloon == 9){
+					required_balloon = 8 * parseInt(Length, 10)
+				}
+				else if(size_of_balloon == 11){
+					required_balloon = 6 * parseInt(Length, 10)
+				}
+				else if (size_of_balloon == 14){
+					required_balloon = 4 * parseInt(Length, 10)
+				}
+				else if (size_of_balloon == 16){
+					required_balloon = 4 * parseInt(Length, 10)
+				}
+			
+				/*document.getElementById("Balloons").innerHTML =required_balloon;
+				document.getElementById("Width").innerHTML = Width;
+				document.getElementById("Height").innerHTML = Height;
+				document.getElementById("Length").innerHTML = Length;
+				document.getElementById('Element').style.display = "block";*/
+				var lengthInMeters = Length/3.281;
+				lengthInMeters = lengthInMeters.toFixed(2);
+				
+				//document.getElementById("result_msg").innerHTML = lengthInMeters + "미터 길이의 아치를 만드는데 필요한 풍선의 갯수는 " + required_balloon + "개 입니다." 
+				document.getElementById("result_msg").innerHTML = "아치를 만드는데 필요한 풍선의 갯수는 " + required_balloon + "개 입니다.";
+				
+				modal.show();
+			}
+		}
+		</script>
+	</body>
+</html>
